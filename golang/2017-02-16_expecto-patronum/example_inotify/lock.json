@@ -1,0 +1,13 @@
+{
+    "memo": "96c38be32705ca1862a5ce5d809a6c65c31855f9cf33d665c00db8d0c8c65bc4",
+    "projects": [
+        {
+            "name": "github.com/howeyc/fsnotify",
+            "branch": "master",
+            "revision": "f0c08ee9c60704c1879025f2ae0ff3e000082c13",
+            "packages": [
+                "."
+            ]
+        }
+    ]
+}
