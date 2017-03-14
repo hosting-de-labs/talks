@@ -75,7 +75,6 @@ func process(file string) error {
 	}
 	// wait finished
 	// do something useful here..
-
 	return nil
 }
 

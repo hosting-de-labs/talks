@@ -1,12 +1,29 @@
 package main
 
 import (
+	"io"
 	"io/ioutil"
 	"os"
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 )
+
+type writer struct {
+	Dst  io.Writer
+	Rate float64
+}
+
+func (w writer) Write(buf []byte) (n int, err error) {
+	if len(buf) == 0 {
+		return 0, nil
+	}
+
+	time.Sleep(time.Duration(float64(len(buf)) / w.Rate * float64(time.Second)))
+
+	return w.Dst.Write(buf)
+}
 
 const lie = "🍰" // 4 bytes
 
@@ -35,8 +52,26 @@ func BenchmarkChecksum4000bytes(b *testing.B)    { benchmarkChecksum(1000, b) }
 func BenchmarkChecksum400000bytes(b *testing.B)  { benchmarkChecksum(100000, b) }
 func BenchmarkChecksum4000000bytes(b *testing.B) { benchmarkChecksum(1000000, b) }
 
-func BenchmarkProcess(b *testing.B) {
-	for n := 0; n < b.N; n++ {
-		process("./manifest.json")
+func benchmarkProcess(i int, b *testing.B) {
+	f, _ := os.Create("./testfile_" + strconv.Itoa(i))
+	z, _ := os.Open("/dev/zero")
+	defer z.Close()
+	defer f.Close()
+	w := writer{
+		Dst:  f,
+		Rate: 5 * 1024, // 5kib/s
 	}
+	go io.CopyN(w, z, int64(i))
+
+	for n := 0; n < b.N; n++ {
+		process("./testfile_" + strconv.Itoa(i))
+	}
+	deleteFile(i)
 }
+
+func BenchmarkProcess4bytes(b *testing.B)       { benchmarkProcess(4, b) }
+func BenchmarkProcess40bytes(b *testing.B)      { benchmarkProcess(40, b) }
+func BenchmarkProcess120bytes(b *testing.B)     { benchmarkProcess(120, b) }
+func BenchmarkProcess4000bytes(b *testing.B)    { benchmarkProcess(4000, b) }
+func BenchmarkProcess400000bytes(b *testing.B)  { benchmarkProcess(400000, b) }
+func BenchmarkProcess4000000bytes(b *testing.B) { benchmarkProcess(4000000, b) }
