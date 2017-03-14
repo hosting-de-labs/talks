@@ -76,7 +76,6 @@ func process(file string) error {
 	// wait finished
 	// do something useful here..
 
-	log.Println(label.Info + " Operation successful for: " + file)
 	return nil
 }
 
@@ -96,6 +95,7 @@ func watch(dir string) error {
 				if event.IsCreate() {
 					log.Println(label.Info + " New file: " + event.Name)
 					process(event.Name)
+					log.Println(label.Info + " Operation successful for: " + event.Name)
 				}
 			case err := <-watcher.Error: // HL
 				log.Println(err)
