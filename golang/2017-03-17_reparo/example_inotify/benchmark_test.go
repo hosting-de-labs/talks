@@ -10,6 +10,8 @@ import (
 	"time"
 )
 
+const lie = "🍰" // 4 bytes
+
 type writer struct {
 	Dst  io.Writer
 	Rate float64
@@ -24,8 +26,6 @@ func (w writer) Write(buf []byte) (n int, err error) {
 
 	return w.Dst.Write(buf)
 }
-
-const lie = "🍰" // 4 bytes
 
 func prepareFile(i int) {
 	out := strings.Repeat(lie, i)
@@ -72,6 +72,7 @@ func benchmarkProcess(i int, b *testing.B) {
 func BenchmarkProcess4bytes(b *testing.B)       { benchmarkProcess(4, b) }
 func BenchmarkProcess40bytes(b *testing.B)      { benchmarkProcess(40, b) }
 func BenchmarkProcess120bytes(b *testing.B)     { benchmarkProcess(120, b) }
+func BenchmarkProcess400bytes(b *testing.B)     { benchmarkProcess(400, b) }
 func BenchmarkProcess4000bytes(b *testing.B)    { benchmarkProcess(4000, b) }
 func BenchmarkProcess400000bytes(b *testing.B)  { benchmarkProcess(400000, b) }
 func BenchmarkProcess4000000bytes(b *testing.B) { benchmarkProcess(4000000, b) }
