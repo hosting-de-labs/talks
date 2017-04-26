@@ -68,9 +68,8 @@ func benchmarkProcess(i int, b *testing.B) {
 	deleteFile(i)
 }
 
-func BenchmarkProcess4kbytes(b *testing.B)      { benchmarkProcess(4, b) }
-func BenchmarkProcess40kbytes(b *testing.B)     { benchmarkProcess(40, b) }
-func BenchmarkProcess120kbytes(b *testing.B)    { benchmarkProcess(120, b) }
-func BenchmarkProcess400kbytes(b *testing.B)    { benchmarkProcess(400, b) }
-func BenchmarkProcess4000kbytes(b *testing.B)   { benchmarkProcess(4000, b) }
-func BenchmarkProcess400000kbytes(b *testing.B) { benchmarkProcess(400000, b) }
+func BenchmarkProcess4kbytes(b *testing.B)    { benchmarkProcess(4, b) }
+func BenchmarkProcess40kbytes(b *testing.B)   { benchmarkProcess(40, b) }
+func BenchmarkProcess120kbytes(b *testing.B)  { benchmarkProcess(120, b) }
+func BenchmarkProcess400kbytes(b *testing.B)  { benchmarkProcess(400, b) }
+func BenchmarkProcess4000kbytes(b *testing.B) { benchmarkProcess(4000, b) }
