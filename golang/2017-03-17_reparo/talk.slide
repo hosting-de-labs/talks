@@ -1,0 +1,33 @@
+Reparo!
+Fixing up bad example code with a swish and a flick
+27 Apr 2017
+
+Jean Kahrs
+Department of Magical Accidents and Catastrophes
+- hosting.de
+jean@hosting.de
+https://github.com/jkahrs
+@rindvieh
+
+* Once upon a time..
+.image assets/images/001.png
+.caption ..in a room not too far away.. _ 600
+
+* And at that time..
+.image assets/images/002.png
+
+* Wait a minute..
+
+* process(event.Name)
+.image assets/images/003.png
+
+* What kind of trickery is this?
+.code assets/snippets/001/main.go /START OMIT/,/END OMIT/
+
+* Let's think about this..
+.image assets/images/005.gif _ 600
+
+* Note to self..
+- checksum?
+- Sleep?!
+- ..
