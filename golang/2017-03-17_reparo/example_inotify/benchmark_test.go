@@ -36,21 +36,6 @@ func deleteFile(i int) {
 	os.Remove("./testfile_" + strconv.Itoa(i))
 }
 
-func benchmarkChecksum(i int, b *testing.B) {
-	prepareFile(i)
-	for n := 0; n < b.N; n++ {
-		checksum("./testfile_" + strconv.Itoa(i))
-	}
-	deleteFile(i)
-}
-
-func BenchmarkChecksum4kbytes(b *testing.B)      { benchmarkChecksum(1, b) }
-func BenchmarkChecksum40kbytes(b *testing.B)     { benchmarkChecksum(10, b) }
-func BenchmarkChecksum120kbytes(b *testing.B)    { benchmarkChecksum(30, b) }
-func BenchmarkChecksum400kbytes(b *testing.B)    { benchmarkChecksum(100, b) }
-func BenchmarkChecksum4000kbytes(b *testing.B)   { benchmarkChecksum(1000, b) }
-func BenchmarkChecksum400000kbytes(b *testing.B) { benchmarkChecksum(100000, b) }
-
 func benchmarkProcess(i int, b *testing.B) {
 	f, _ := os.Create("./testfile_" + strconv.Itoa(i))
 	z, _ := os.Open("/dev/zero")
